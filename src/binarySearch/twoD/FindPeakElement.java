@@ -1,6 +1,7 @@
 package binarySearch.twoD;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class FindPeakElement {
 
@@ -145,29 +146,32 @@ public class FindPeakElement {
             //System.out.println("startRow : "+startRow+"   endRow : "+endRow+"  middleRow:"+middleRow);
 
             // will get max element position for that row
-            int rowmax = maxRowElementPosition(mat[middleRow], mat[middleRow].length-1);
-
+            int rowmax = maxRowElementPosition(mat[middleRow]);
             // middle row is the first row
             if (middleRow == 0) {
                 if (mat[middleRow][rowmax] > mat[middleRow + 1][rowmax]) {
                     return new int[]{middleRow, rowmax};
+                } else {
+                    mat[middleRow][rowmax] = Integer.MIN_VALUE;
                 }
             }
 
             //middle row is the last row
-            if (middleRow == mat.length - 1) {
+            else if (middleRow == mat.length - 1) {
                 if (mat[middleRow][rowmax] > mat[middleRow - 1][rowmax]) {
                     return new int[]{middleRow, rowmax};
+                } else {
+                    mat[middleRow][rowmax] = Integer.MIN_VALUE;
                 }
             }
 
             //  checking max element of the row with it's upper and lower row
-            if (mat[middleRow][rowmax] > mat[middleRow + 1][rowmax] && mat[middleRow][rowmax] > mat[middleRow - 1][rowmax]) {
+            else if (mat[middleRow][rowmax] > mat[middleRow + 1][rowmax] && mat[middleRow][rowmax] > mat[middleRow - 1][rowmax]) {
                 return new int[]{middleRow, rowmax};
             }
 
             // if max is lesser than next rows same column element, will move startRow to the nextRow
-            if (mat[middleRow][rowmax] < mat[middleRow + 1][rowmax]) {
+            else if (mat[middleRow][rowmax] < mat[middleRow + 1][rowmax]) {
                 startRow = middleRow+1;
             } else {                             // otherwise move the endRow to current row -1
                 endRow = middleRow -1;
@@ -179,21 +183,64 @@ public class FindPeakElement {
 
     }
 
-    private static int maxRowElementPosition(int[] arr, int end) {
-        int max = 0;
+//    private static int maxRowElementPosition(int[] arr, int end) {
+//        int max = 0;
+//
+//
+//        for ( int i = 0; i <= end; i++){
+//            if (arr[i] > arr[max]){
+//                max = i;
+//            }
+//        }
+//
+//        return max;
+//    }
 
-
-        for ( int i = 0; i <= end; i++){
-            if (arr[i] > arr[max]){
-                max = i;
+    public static int maxRowElementPosition(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (isPeak(nums, mid,nums.length) == 0) {
+                return mid;
+            } else if (isPeak(nums, mid, nums.length) == 1) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
+        return -1;
+    }
 
-        return max;
+    public static int isPeak(int[] nums, int index, int n) {
+        if (index == 0) {
+            if (nums[index] > nums[index + 1]) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else if (index == n - 1) {
+            if (nums[index - 1] < nums[index]) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            if (nums[index] > nums[index + 1] && nums[index] > nums[index - 1]) {
+                return 0;
+            } else if (nums[index - 1] < nums[index] && nums[index] < nums[index + 1]) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
     }
 
     public static void main(String[] args) {
-        int[][] x = {{1, 4}, {3, 2}};
+//        int[][] x = {{1, 4}, {3, 2}};
+        int[][] x = {{10, 30, 40, 50, 20}, {1, 3, 2, 500, 4}};
 //        int[][] x = {
 //                {10, 2, 3},
 //                {4, 9, 6},
