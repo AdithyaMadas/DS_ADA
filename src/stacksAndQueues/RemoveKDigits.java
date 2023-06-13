@@ -31,7 +31,6 @@ public class RemoveKDigits {
     }*/
 
     public static String removeKdigits(String num, int k) {
-        int i = 0;
         ArrayDeque<Character> stack = new ArrayDeque<>();
 
         if(k==num.length()) return "0";
@@ -58,6 +57,7 @@ public class RemoveKDigits {
 
 
     public static void main(String[] args) {
+        System.out.println(removeKdigits("1432219", 3));
         System.out.println(removeKdigits("1234567890", 9));
     }
 }

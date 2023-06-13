@@ -2,7 +2,7 @@ package slidingWindowAndTwoPointer.redo;
 
 import java.util.Arrays;
 
-public class LongestRepeatingCharacterReplacement {
+public class LongestCharReplacement {
     public static int characterReplacement(String s, int k) {
         int[] charCount = new int[26];
         int i = 0, maxLen = 0;
@@ -21,6 +21,7 @@ public class LongestRepeatingCharacterReplacement {
     }
 
     public static void main(String[] args) {
-        System.out.println(characterReplacement("AABABBA", 1));
+        characterReplacement("ABAB", 2);
+        characterReplacement("AABABBA", 1);
     }
 }

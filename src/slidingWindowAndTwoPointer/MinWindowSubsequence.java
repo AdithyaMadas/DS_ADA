@@ -3,7 +3,7 @@ package slidingWindowAndTwoPointer;
 //https://www.youtube.com/watch?v=W2DvQcDPD9A
 public class MinWindowSubsequence {
     static String minWindow(String str1, String str2) {
-        String res = str1 + "aa";
+        String res = str1 + "a";
         int i = 0;
         for (int j = 0; j < str1.length(); j++) {
             if (str1.charAt(j) == str2.charAt(i)) {
@@ -29,6 +29,7 @@ public class MinWindowSubsequence {
     }
 
     public static void main(String[] args) {
+        System.out.println(minWindow("geeksforgeeks", "eksrg"));
         System.out.println(minWindow("ierfwenhfa", "efna"));
 
     }

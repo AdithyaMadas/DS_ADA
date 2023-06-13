@@ -31,9 +31,8 @@ public class InorderTraversal {
 
 
     public static void main(String[] args) {
-        TreeNode treeNode = new TreeNode(1);
-        treeNode.right = new TreeNode(2);
-        treeNode.right.left = new TreeNode(3);
+        TreeNode treeNode = new TreeNode(0);
+        treeNode.right = new TreeNode(0);
         System.out.println(inorderTraversal(treeNode));
     }
 }
